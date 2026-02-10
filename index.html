@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شاہ شمس ورلڈ فورم - آفیشل پورٹل</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lateef&family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root { 
+            --dark-blue: #051632; 
+            --gold: #c7a14a; 
+            --accent: #1e3a8a;
+            --white: #ffffff; 
+        }
+
+        * { box-sizing: border-box; transition: all 0.3s ease; }
+
+        body {
+            margin: 0; padding: 0; background: #e2e8f0;
+            font-family: 'Noto Nastaliq Urdu', serif; color: var(--dark-blue);
+            overflow-x: hidden; font-size: 13px;
+        }
+
+        header {
+            background: var(--dark-blue); color: #f4d03f; padding: 5px 15px;
+            text-align: center; border-bottom: 3px solid var(--gold);
+            position: sticky; top: 0; z-index: 1000;
+            height: 60px; display: flex; align-items: center; justify-content: center; gap: 10px;
+            transition: 0.4s;
+        }
+        header.shrink { height: 40px; }
+        header img { height: 25px; width: 25px; border-radius: 50%; border: 1px solid var(--gold); transition: 0.4s; }
+        header.shrink img { height: 25px; width: 25px; }
+        header h1 { font-family: 'Lateef', cursive; font-size: 22px; margin: 0; transition: 0.4s; }
+        header.shrink h1 { font-size: 17px; }
+
+        .sub-bar {
+            background: var(--dark-blue); color: var(--white);
+            text-align: center; padding: 4px 0; font-family: 'Lateef', cursive;
+            font-size: 16px; letter-spacing: 1px;
+        }
+
+        .container { width: 94%; max-width: 500px; margin: 15px auto; }
+
+        .form-section {
+            background: var(--white); margin-bottom: 30px; border-radius: 8px;
+            border: 2px solid var(--dark-blue); position: relative;
+            box-shadow: 8px 8px 0px rgba(5, 22, 50, 0.1);
+        }
+
+        .section-header {
+            background: var(--dark-blue); color: #f4d03f; padding: 8px 15px;
+            font-family: 'Lateef', cursive; font-size: 19px;
+            display: flex; align-items: center; gap: 15px;
+            clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+        }
+
+        .section-body { padding: 15px; }
+
+        .form-group { margin-bottom: 12px; text-align: right; }
+        label { display: block; margin-bottom: 4px; font-weight: bold; font-size: 12px; color: var(--accent); }
+        
+        input, select, textarea {
+            width: 100%; padding: 8px; border: 1px solid #cbd5e1;
+            border-radius: 6px; font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: 12px; background: #fdfdfd;
+        }
+
+        .photo-upload-container {
+            text-align: center; border: 1px dashed var(--gold);
+            padding: 10px; border-radius: 8px; background: #fffcf0;
+        }
+        #photo-preview {
+            width: 80px; height: 80px; border-radius: 8px;
+            object-fit: cover; border: 2px solid var(--gold);
+            margin-bottom: 10px; display: none;
+        }
+        .photo-btns label {
+            background: var(--accent); color: white; padding: 6px 15px;
+            border-radius: 4px; cursor: pointer; font-size: 12px; display: inline-block;
+        }
+
+        .submit-btn {
+            width: 90%; margin: 10px auto; background: var(--dark-blue); color: #f4d03f;
+            padding: 8px; border-radius: 50px; border: 2px solid var(--gold);
+            font-family: 'Lateef', cursive; font-size: 20px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+
+        .share-input-group {
+            display: flex; background: #ffffff; border-radius: 25px; 
+            padding: 2px 5px; margin: 10px 0; border: 1px solid var(--dark-blue);
+            width: 70%; margin-left: auto; margin-right: auto;
+        }
+        .share-input-group input { border: none; background: transparent; flex: 1; height: 30px; text-align: center; }
+        .wa-btn {
+            background: #25d366; color: white; border: none;
+            width: 32px; height: 32px; border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .copy-btn {
+            width: 90%; margin: 12px auto; background: var(--white); color: var(--dark-blue);
+            padding: 8px; border-radius: 50px; border: 1px solid var(--gold);
+            font-family: 'Lateef', cursive; font-size: 18px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+
+        .hidden { display: none; }
+        .halaf-box { background: #fffef2; border: 1px dashed var(--gold); padding: 12px; border-radius: 8px; font-family: 'Lateef', cursive; font-size: 18px; line-height: 1.6; text-align: justify; }
+        
+        /* Helper text for date */
+        .input-hint { font-size: 10px; color: #64748b; margin-top: 2px; }
+    </style>
+</head>
+<body>
+
+<header id="navbar">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPoiq9RtQMe3EmfpGizioUwOXARgWHrrY7QgF-csJPLsrOgEYLDnAx-Kb_dQ-22Xe_afBL2V5FsprOFpDhjJ0j5h3_SF3ZN5bbyOhIO8MVjdaClL6NI=s370-no" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png'">
+    <h1>شاہ شمس ورلڈ فورم</h1>
+</header>
+<div class="sub-bar">آفیشل ممبر شپ پورٹل</div>
+
+<div class="container">
+    <form id="sswfMasterForm">
+        <div class="form-section">
+            <div class="section-header"><i class="fas fa-id-card"></i> 1. زاتی معلومات</div>
+            <div class="section-body">
+                <div class="form-group"><label>1.1 مکمل نام:</label><input type="text" name="Name" id="name" class="save-local" placeholder="نام درج کریں" oninput="updateHalafName()"></div>
+                <div class="form-group"><label>1.2 والد کا نام:</label><input type="text" name="Father" id="father" class="save-local" placeholder="والد کا نام درج کریں" oninput="updateHalafName()"></div>
+                <div class="form-group"><label>1.3 دادا کا نام:</label><input type="text" name="GrandFather" id="grand_father" class="save-local" placeholder="دادا کا نام درج کریں"></div>
+                
+                <div class="form-group">
+                    <label>1.4 کس بزرگ کی اولاد / شاخ ہیں؟ (مورثِ اعلیٰ کا نام):</label>
+                    <input type="text" name="Ancestor_Name" id="ancestor_name" class="save-local" placeholder="مثلاً حضرت پیر سید غوث محمد شاہ">
+                </div>
+
+                <div class="form-group">
+                    <label>1.5 شجرہ نسب کا حوالہ :</label>
+                    <input type="text" name="Shajra_Ref" id="shajra_ref" class="save-local" placeholder="کتاب کا نام اور صفحہ نمبر">
+                </div>
+
+                <div class="form-group">
+                    <label>1.6 تاریخِ پیدائش (دن-مہینہ-سال):</label>
+                    <input type="text" inputmode="numeric" name="DOB" id="dob" class="save-local" placeholder="مثلاً 15-08-1990">
+                    <div class="input-hint"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>1.7 بلڈ گروپ:</label>
+                    <select id="blood" name="Blood" class="save-local">
+                        <option value="">بلڈ گروپ منتخب کریں</option>
+                        <option>A+</option><option>B+</option><option>O+</option><option>AB+</option>
+                        <option>A-</option><option>B-</option><option>O-</option><option>AB-</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>1.8 کیا آپ بلڈ ڈونر ہیں؟</label>
+                    <select id="blood_donor" name="Blood_Donor" class="save-local">
+                        <option value="نہیں">نہیں</option>
+                        <option value="جی ہاں">جی ہاں</option>
+                    </select>
+                </div>
+
+                <div class="form-group"><label>1.9 تعلیمی قابلیت:</label><input type="text" name="Edu" id="edu" class="save-local" placeholder="تعلیم"></div>
+                <div class="form-group"><label>1.10 موجودہ رہائشی پتہ:</label><textarea name="Address" id="address" class="save-local" rows="2" placeholder="مکمل پتہ"></textarea></div>
+                
+                <div class="form-group">
+                    <label>1.11 پروفیشنل تصویر:</label>
+                    <div class="photo-upload-container">
+                        <img id="photo-preview" src="" alt="Preview">
+                        <div class="photo-btns">
+                            <label for="photo-file"><i class="fas fa-camera"></i> تصویر منتخب کریں</label>
+                            <input type="file" id="photo-file" accept="image/*" style="display:none" onchange="uploadToImgBB(this)">
+                        </div>
+                        <div id="upload-status" style="font-size:11px; margin-top:5px;">تصویر لازمی ہے</div>
+                        <input type="hidden" name="Photo_URL" id="photo_url" class="save-local">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="section-header"><i class="fas fa-briefcase"></i> 2. پیشہ</div>
+            <div class="section-body">
+                <div class="form-group">
+                    <label>2.1 پیشہ منتخب کریں:</label>
+                    <select id="job_main" name="Job_Main" class="save-local" onchange="toggleJobLogic()">
+                        <option value="نوکری">نوکری</option><option value="کاروبار">کاروبار</option><option value="دیگر">دیگر</option>
+                    </select>
+                </div>
+                <div id="job_box">
+                    <div class="form-group"><label>2.2 نوکری کی قسم:</label><select name="Job_Type" id="job_type" class="save-local"><option>سرکاری</option><option>پرائیویٹ</option></select></div>
+                    <div class="form-group"><label>2.3 حیثیث / گریڈ:</label><input type="text" name="Job_Grade" id="job_grade" class="save-local" placeholder="عہدہ / گریڈ"></div>
+                    <div class="form-group"><label>2.4 شعبہ:</label><input type="text" name="Job_Dept" id="job_dept" class="save-local" placeholder="مثلاً تعلیم، صحت"></div>
+                    <div class="form-group"><label>2.5 محکمہ:</label><input type="text" name="Job_Org" id="job_org" class="save-local" placeholder="ادارے کا نام"></div>
+                    <div class="form-group"><label>2.6 موجودہ حیثیث:</label><select name="Service_Status" id="job_serv_status" class="save-local"><option>حاضر سروس</option><option>ریٹائرڈ</option></select></div>
+                </div>
+                <div id="biz_box" class="hidden">
+                    <div class="form-group"><label>2.7 کاروبار کی قسم:</label><input type="text" name="Biz_Type" id="biz_type" class="save-local" placeholder="کاروبار کی نوعیت"></div>
+                    <div class="form-group"><label>2.8 کاروبار کی جگہ:</label><input type="text" name="Biz_Loc" id="biz_loc" class="save-local" placeholder="شہر یا علاقہ"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="section-header"><i class="fas fa-sitemap"></i> 3. تنظیمی کوائف</div>
+            <div class="section-body">
+                <div class="form-group">
+                    <label>3.1 کسی سماجی، دینی یا قومی تنظیم میں سابقہ خدمات:</label>
+                    <input type="text" name="Org_Exp" id="org_exp" class="save-local" placeholder="تنظیم کا نام اور عہدہ لکھیں">
+                </div>
+                <div class="form-group">
+                    <label>3.2 کیا آپ فورم میں پہلے سے کوئی عہدہ یا ذمہ داری ادا کر رہے ہیں؟</label>
+                    <select id="has_duty" name="Already_Duty" class="save-local" onchange="toggleOrgLogic()">
+                        <option value="نہیں">نہیں</option><option value="جی ہاں">جی ہاں</option>
+                    </select>
+                </div>
+                <div id="duty_name_box" class="hidden">
+                    <div class="form-group"><label>3.3 موجودہ عہدہ:</label><input type="text" name="Current_Duty" id="curr_duty" class="save-local" placeholder="موجودہ ذمہ داری"></div>
+                </div>
+
+                <div id="new_join_logic">
+                    <div class="form-group">
+                        <label>3.4 شمولیت بطور:</label>
+                        <select id="join_as" name="Join_As" class="save-local" onchange="toggleOrgLogic()">
+                            <option value="ممبر">ممبر</option><option value="ڈونر">ڈونر</option><option value="عہدہ دار">عہدہ دار</option>
+                        </select>
+                    </div>
+
+                    <div id="target_duty_box" class="hidden">
+                        <div class="form-group">
+                            <label>3.5 کونسا عہدہ/زمہ داری لینا چاہیں گے؟</label>
+                            <select id="target_duty" name="Target_Duty" class="save-local">
+                                <option value="">عہدہ منتخب کریں</option>
+                                <option>صدر</option><option>نائب صدر</option><option>سیکرٹری جنرل</option>
+                                <option>ڈپٹی سیکرٹری جنرل</option><option>سیکرٹری نشر و اشاعت</option>
+                                <option>سیکرٹری مالیات</option><option>سیکرٹری تعلیم و تربیت</option>
+                                <option>سیکرٹری شماریات / شجرہ نسب</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>3.6 کس سطح کی زمہ داری لینا چاہیں گے؟</label>
+                            <select id="duty_level" name="Duty_Level" class="save-local">
+                                <option value="">سطح منتخب کریں</option>
+                                <option>لوکل</option><option>ضلعی</option><option>صوبائی</option><option>مرکزی</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>3.7 شاہ شمس ورلڈ فورم میں کس شعبہ میں خدمات انجام دینے کی خواہش رکھتے ہیں؟</label>
+                    <select id="target_dept" name="Target_Dept" class="save-local">
+                        <option value="">شعبہ منتخب کریں</option>
+                        <option>1۔ تعلیم</option><option>2۔ میڈیکل</option><option>3۔ ٹیکنیکل /انجنئیرنگ</option>
+                        <option>4۔ قانون و انصاف</option><option>5۔ معاشیات /اکنامکس</option><option>6۔ فنانس / مالیات</option>
+                        <option>7۔ سوشل سروسز/سماجیات</option><option>8۔ دینی تعلیم</option><option>9۔ اے آئی/ آرٹیفیشل انٹیلیجنس</option>
+                        <option>10۔ سکلز ڈویلپمنٹ</option><option>11۔ آفس مینیجمنٹ</option><option>12۔ تربیت و تعمیر شخصیت و کردار سازی</option>
+                        <option>13۔ روحانیات</option><option>14۔ دیگر</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="section-header"><i class="fas fa-phone-alt"></i> 4. رابطہ و لنکس</div>
+            <div class="section-body">
+                <div class="form-group"><label>4.1 فون نمبر:</label><input type="tel" name="Phone" id="phone" class="save-local" placeholder="923..."></div>
+                <div class="form-group"><label>4.2 واٹس ایپ نمبر:</label><input type="tel" name="WhatsApp" id="wa" class="save-local" placeholder="923..."></div>
+                <div class="form-group"><label>4.3 فیس بک لنک:</label><input type="url" name="FB_Link" id="fb" class="save-local" placeholder="Facebook Link"></div>
+                <div class="form-group"><label>4.4 یوٹیوب لنک:</label><input type="url" name="YT_Link" id="yt" class="save-local" placeholder="YouTube Link"></div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="section-header"><i class="fas fa-check-double"></i> 5. بیانِ حلفی</div>
+            <div class="section-body">
+                <div class="halaf-box" id="halaf_content">
+                    میں <span id="display_name" style="color:var(--accent); font-weight:bold;">(________)</span> ولد <span id="display_father" style="color:var(--accent); font-weight:bold;">(________)</span> حلفاً اقرار کرتا ہوں کہ میں شاہ شمس ورلڈ فورم کے دستور اور قواعد و ضوابط کی مکمل پاسداری کروں گا۔ میں حلفاً بیان کرتا ہوں کہ میں اولادِ حضرت سید شمس الدین محمد سبزواری ہوں اور میرے شجرہ نسب کا ریکارڈ موجود ہے۔ میں اپنی تمام تر صلاحیتیں قوم و ملت کی فلاح و بہبود اور فورم کے منشور کی ترویج و اشاعت کے لیے وقف کروں گا۔ میں کسی بھی ایسی سرگرمی میں حصہ نہیں لوں گا جو فورم کے مفادات یا ملکی قوانین کے منافی ہو۔ میری فراہم کردہ تمام معلومات درست ہیں اور کسی بھی غلط بیانی کی صورت میں میری ممبر شپ منسوخ کرنے کا حق فورم کے پاس محفوظ ہے۔
+                </div>
+                <div style="display:flex; gap:10px; align-items:center; margin-top:10px;">
+                    <input type="checkbox" id="agree" required style="width:18px; height:18px;">
+                    <label for="agree" style="margin:0;">میں مندرجہ بالا بیانِ حلفی سے مکمل متفق ہوں۔</label>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" id="submitBtn" class="submit-btn">درخواست جمع کروائیں <i class="fab fa-whatsapp"></i></button>
+    </form>
+
+    <div class="form-section" style="background: #f8fafc; border: 2px dashed #94a3b8;">
+        <div class="section-header"><i class="fas fa-share-alt"></i> 6. شیئرنگ پورشن</div>
+        <div class="section-body" style="text-align: center;">
+            <div class="share-desc" style="font-size: 11px; margin-bottom: 10px;">نمبر لکھ کر واٹس ایپ کریں یا لنک کاپی کریں۔</div>
+            <div class="share-input-group">
+                <input type="tel" id="share_num" placeholder="923001234567">
+                <button class="wa-btn" onclick="shareForm()"><i class="fab fa-whatsapp"></i></button>
+            </div>
+            <button class="copy-btn" id="copyBtn" onclick="copyFullText()"><i class="far fa-copy"></i> لنک کاپی کریں</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const MY_URL = window.location.href;
+    const FULL_COPY_MSG = `*شاہ شمس ورلڈ فورم*\nآفیشل ممبر شپ فارم لنک 👇\n${MY_URL}`;
+    const IMGBB_API_KEY = "b1118fa3feace7e6c435b08c27200688";
+    const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbxnsbWp-HyDJ3SAKHH9Ph9v5k3Terkj3KyFXBJg0PoOvAsWdVOLlz2okxBi9rWharG3/exec"; 
+    const ARCH_LINE = "✿⊱••┈┈┈┈✿┈┈┈┈•⊰✿";
+
+    window.onscroll = function() {
+        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+            document.getElementById("navbar").classList.add("shrink");
+        } else {
+            document.getElementById("navbar").classList.remove("shrink");
+        }
+    };
+
+    async function uploadToImgBB(input) {
+        const file = input.files[0];
+        if (!file) return;
+        const statusLabel = document.getElementById('upload-status');
+        const preview = document.getElementById('photo-preview');
+        const photoUrlInput = document.getElementById('photo_url');
+        statusLabel.innerHTML = 'اپلوڈنگ...';
+        const formData = new FormData();
+        formData.append("image", file);
+        try {
+            const response = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, { method: "POST", body: formData });
+            const data = await response.json();
+            if (data.success) {
+                photoUrlInput.value = data.data.url;
+                localStorage.setItem('photo_url', data.data.url);
+                preview.src = data.data.url; preview.style.display = 'block';
+                statusLabel.innerHTML = '✅ اپلوڈ مکمل';
+            }
+        } catch (e) { statusLabel.innerHTML = '❌ ناکام'; }
+    }
+
+    function updateHalafName() {
+        document.getElementById('display_name').innerText = document.getElementById('name').value || "(________)";
+        document.getElementById('display_father').innerText = document.getElementById('father').value || "(________)";
+    }
+
+    function toggleJobLogic() {
+        const v = document.getElementById('job_main').value;
+        document.getElementById('job_box').style.display = (v === 'نوکری' ? 'block' : 'none');
+        document.getElementById('biz_box').style.display = (v === 'کاروبار' ? 'block' : 'none');
+    }
+
+    function toggleOrgLogic() {
+        const hasD = document.getElementById('has_duty').value;
+        const join = document.getElementById('join_as').value;
+        if (hasD === 'جی ہاں') {
+            document.getElementById('duty_name_box').style.display = 'block';
+            document.getElementById('new_join_logic').style.display = 'none';
+        } else {
+            document.getElementById('duty_name_box').style.display = 'none';
+            document.getElementById('new_join_logic').style.display = 'block';
+            document.getElementById('target_duty_box').style.display = (join === 'عہدہ دار' ? 'block' : 'none');
+        }
+    }
+
+    function copyFullText() {
+        const temp = document.createElement("textarea");
+        temp.value = FULL_COPY_MSG; document.body.appendChild(temp);
+        temp.select(); document.execCommand("copy"); document.body.removeChild(temp);
+        const btn = document.getElementById('copyBtn');
+        btn.innerHTML = '✅ لنک کاپی ہو گیا!';
+        setTimeout(() => btn.innerHTML = '<i class="far fa-copy"></i> لنک کاپی کریں', 2000);
+    }
+
+    function shareForm() {
+        const num = document.getElementById('share_num').value;
+        if(!num) return alert("نمبر درج کریں");
+        window.open(`https://wa.me/${num}?text=${encodeURIComponent(FULL_COPY_MSG)}`);
+    }
+
+    document.getElementById('sswfMasterForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const submitBtn = document.getElementById('submitBtn');
+        const getVal = (id) => document.getElementById(id)?.value || "درج نہیں";
+        const photo = document.getElementById('photo_url').value;
+        
+        if(!photo) return alert("تصویر اپلوڈ کریں!");
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "ڈیٹا محفوظ ہو رہا ہے...";
+
+        const formData = new FormData(this);
+        fetch(GOOGLE_SHEET_URL, { method: 'POST', body: formData, mode: 'no-cors' })
+        .then(() => {
+            sendWhatsApp(getVal, photo);
+        })
+        .catch(error => {
+            console.error('Error!', error.message);
+            sendWhatsApp(getVal, photo);
+        });
+    });
+
+    function sendWhatsApp(getVal, photo) {
+        const submitBtn = document.getElementById('submitBtn');
+        
+        let msg = "📸 تصویر لنک: " + photo + "\n\n";
+        msg += "✅ *شاہ شمس ورلڈ فورم - آفیشل ممبر شپ فارم*\n" + ARCH_LINE + "\n\n";
+        
+        msg += "*(1. زاتی معلومات)*\n";
+        msg += "👤 نام: " + getVal('name') + "\n👴 ولدیت: " + getVal('father') + "\n👴 دادا کا نام: " + getVal('grand_father') + "\n👑 مورثِ اعلیٰ: " + getVal('ancestor_name') + "\n📖 شجرہ حوالہ: " + getVal('shajra_ref') + "\n📅 پیدائش: " + getVal('dob') + "\n🩸 بلڈ گروپ: " + getVal('blood') + "\n💉 بلڈ ڈونر: " + getVal('blood_donor') + "\n🎓 تعلیم: " + getVal('edu') + "\n🏠 پتہ: " + getVal('address') + "\n\n";
+        msg += ARCH_LINE + "\n\n";
+
+        msg += "*(2. پیشہ)*\n";
+        msg += "💼 نوعیت: " + getVal('job_main') + "\n";
+        if(getVal('job_main') === 'کاروبار') {
+            msg += "🏭 کاروبار: " + getVal('biz_type') + "\n📍 مقام: " + getVal('biz_loc') + "\n";
+        } else {
+            msg += "🏢 ادارہ: " + getVal('job_org') + "\n🏅 عہدہ/گریڈ: " + getVal('job_grade') + "\n";
+        }
+        msg += "\n" + ARCH_LINE + "\n\n";
+
+        msg += "*(3. تنظیمی کوائف)*\n";
+        msg += "🚩 سابقہ خدمات: " + getVal('org_exp') + "\n";
+        if(getVal('has_duty') === 'جی ہاں') {
+            msg += "🏅 موجودہ عہدہ: " + getVal('curr_duty') + "\n";
+        } else {
+            msg += "✨ شمولیت بطور: " + getVal('join_as') + "\n";
+            if(getVal('join_as') === 'عہدہ دار') {
+                msg += "🏅 مطلوبہ عہدہ: " + getVal('target_duty') + "\n🌍 سطح: " + getVal('duty_level') + "\n";
+            }
+        }
+        msg += "🌟 مطلوبہ شعبہ خدمات: " + getVal('target_dept') + "\n\n";
+        msg += ARCH_LINE + "\n\n";
+
+        msg += "*(4. رابطہ و لنکس)*\n";
+        msg += "📞 فون: " + getVal('phone') + "\n💬 واٹس ایپ: " + getVal('wa') + "\n🔗 FB: " + getVal('fb') + "\n🔗 YT: " + getVal('yt') + "\n\n";
+        msg += ARCH_LINE + "\n\n";
+        
+        msg += "*محترم آپ کا ڈیٹا فارم موصول ہو گیا ہے ایگزیکٹو اپروول کے بعد آپ کو نوٹیفکیشن جاری کردیا جائے گا شکریہ!*";
+
+        const finalUrl = "https://wa.me/923167040072?text=" + encodeURIComponent(msg);
+        window.location.href = finalUrl;
+        
+        setTimeout(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'درخواست جمع کروائیں <i class="fab fa-whatsapp"></i>';
+        }, 3000);
+    }
+
+    window.onload = () => {
+        document.querySelectorAll('.save-local').forEach(el => {
+            const saved = localStorage.getItem(el.id);
+            if(saved) {
+                el.value = saved;
+                if(el.id === 'name' || el.id === 'father') updateHalafName();
+                if(el.id === 'photo_url' && saved !== "") {
+                    const prev = document.getElementById('photo-preview');
+                    prev.src = saved; prev.style.display = 'block';
+                }
+            }
+            el.addEventListener('input', () => localStorage.setItem(el.id, el.value));
+        });
+        toggleJobLogic(); toggleOrgLogic();
+    };
+</script>
+
+</body>
+</html>
